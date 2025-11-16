@@ -28,3 +28,5 @@ urlpatterns = [
     path('cars/',include('car.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve static files even when DEBUG is False (for development)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
