@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% load static %}
+<style>
+.signup-container {
+    width: 90%;
+    max-width: 950px;
+    margin: 60px auto;
+    padding: 45px;
+    background: white;
+    border-radius: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.signup-left {
+    width: 50%;
+    padding-right: 20px;
+}
+
+.signup-left h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.signup-left form input,
+.signup-left form select {
+    border: none !important;
+    border-bottom: 1px solid #ddd !important;
+    border-radius: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+}
+
+.signup-left form input:focus {
+    border-bottom: 2px solid #4a8be0 !important;
+}
+
+.signup-btn {
+    width: 180px;
+    padding: 13px;
+    background: #61a3ff;
+    border: none;
+    color: white;
+    font-size: 18px;
+    border-radius: 7px;
+    margin-top: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.signup-btn:hover {
+    background: #4a8be0;
+}
+
+.signup-right img {
+    width: 330px;
+}
+
+@media (max-width: 890px){
+    .signup-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .signup-left, .signup-right{
+        width: 100%;
+    }
+    .signup-right img{
+        width: 270px;
+        margin-top: 25px;
+    }
+}
+</style>
+
+
+<div class="signup-container">
+
+    <div class="signup-left">
+
+        {% if messages %}
+            {% for m in messages %}
+                <p class="bg-success p-3 text-white">{{ m }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <h1>{{ type }}</h1>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="signup-btn">Submit</button>
+        </form>
+
+        
+    </div>
+
+    <div class="signup-right">
+        <img src="{% static '/login.jpg' %}">
+    </div>
+
+</div>
+
+{% endblock content %}

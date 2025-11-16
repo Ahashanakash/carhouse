@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f0f2f5;
+    }
+
+    .form-container {
+        max-width: 450px;
+        margin: 60px auto;
+        padding: 40px;
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .form-container h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 700;
+        color: #333;
+    }
+
+    .btn-info, .btn-warning {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .messages {
+        margin-bottom: 20px;
+    }
+
+    .messages p {
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 500;
+    }
+
+    .messages .success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .change-pass {
+        text-align: right;
+        margin-bottom: 20px;
+    }
+
+    .change-pass .btn-warning {
+        width: auto;
+        padding: 8px 20px;
+    }
+</style>
+
+<div class="form-container">
+    {% if messages %}
+        <div class="messages">
+            {% for m in messages %}
+                <p class="{% if m.tags %}{{ m.tags }}{% else %}success{% endif %}">{{ m }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="change-pass">
+        <a class="btn btn-warning" href="{% url 'pass_change' %}">Change password</a>
+    </div>
+
+    <form action="" method="post">
+        <h1>{{ type }}</h1>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-info mt-3">Submit</button>
+    </form>
+</div>
+{% endblock content %}
